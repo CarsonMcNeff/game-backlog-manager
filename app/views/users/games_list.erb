@@ -1,0 +1,13 @@
+<h1> Hey <%=@user.username%>, heres your backlog </h1>
+
+<ul>
+    <%@user.games.each do |game|%>
+    <li><%=game.name%></li>
+    <%end%>
+</ul>
+
+<a href = "/user/<%=@user.id%>/gameslist/new">Click here to add to your list</a>
+<br>
+<a href = "/user/<%=@user.id%>/gameslist/edit">Click here to edit your list</a>
+<br>
+<p><a href="/logout">Log Out</a></p>

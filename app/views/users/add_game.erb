@@ -1,0 +1,19 @@
+<h1>Add a game to your backlog</h1>
+<form method="post" action = "/user/<%=@user.id%>/gameslist/new">
+    <label for="Game">Pick your game from the database if available:</label>
+    <input list="Games" name = "Game">
+    <datalist id="Games">
+        <% Game.all.each do |game|%>
+            <option value="<%=game.name%>">
+        <%end%>
+    </datalist>
+
+    <br>
+    <br>
+    <label for="NewGame">Don't see the game you want to add in the list?<br>
+    Add a new one here:</label>
+    <input type = "text" name = "NewGame">
+    <br>
+    <h2>Add some details to the game</h2>
+    
+</form>

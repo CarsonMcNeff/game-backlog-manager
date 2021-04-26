@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2021_04_26_011054) do
 
-  create_table "game_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "game_id"
-    t.string "notes"
-  end
-
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.decimal "rating"
@@ -27,6 +21,14 @@ ActiveRecord::Schema.define(version: 2021_04_26_011054) do
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
+  end
+
+  create_table "users_games", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "game_id"
+    t.string "notes"
+    t.boolean "completed"
+    t.decimal "personal_rating"
   end
 
 end
