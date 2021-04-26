@@ -1,3 +1,3 @@
-class GamesController < Sinatra::Base
-    
+class GamesController < ApplicationController
+
 end

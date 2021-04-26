@@ -1,3 +1,31 @@
-class UsersController < Sinatra::Base
-    
+class UsersController < ApplicationController
+    get '/user/signup' do 
+        erb :'users/signup'
+    end
+
+    post '/user/signup' do 
+        if params[:username] == "" || params[:password] == ""
+            redirect '/failure'
+        else  
+            User.create(username: params[:username], password: params[:password])
+            redirect '/login'
+        end 
+    end
+
+    get '/user/login' do 
+        erb :'users/login'
+    end
+
+    post '/user/login' do
+        @user = User.find_by(username: params[:username])
+        if @user && @user.authenticate(params[:password])
+            session[:user_id] = @user.id
+            redirect "/user/#{@user.id}"
+        end
+    end
+
+    get '/user/:id' do 
+        @user = User.find(session[:user_id])
+        erb :'users/account_index'
+    end
 end
