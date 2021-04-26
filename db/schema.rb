@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_26_011054) do
+ActiveRecord::Schema.define(version: 2021_04_26_215049) do
 
   create_table "games", force: :cascade do |t|
     t.string "name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 2021_04_26_011054) do
     t.string "notes"
     t.boolean "completed"
     t.decimal "personal_rating"
+    t.string "completion_time"
   end
 
 end
