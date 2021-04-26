@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
     get '/user/:id/gameslist' do 
         @user = User.find(session[:user_id])
-        @users_games = UsersGame.all.filter{|x|x.user_id == @user.id}
+        @users_games = @user.users_games
         erb :'users/games_list'
     end
 
@@ -49,20 +49,22 @@ class UsersController < ApplicationController
     
     post '/user/:id/gameslist/new' do 
         @user = User.find(session[:user_id])
-        # Checks if the game is already in the database and if it isn't adds it, if a user
-        # accidently tries to add a game that already exists in the database it just uses the
-        # copy from the database
-        if params["NewGame"] != "" && params["Game"] == "" && Game.find_by(name: params["NewGame"]) == nil
-            @game = Game.create(name: params["NewGame"])
-        elsif params["Game"] != "" && params["NewGame"] == ""
-            @game = Game.find_by(name: params["Game"])
-        elsif Game.find_by(name: params["NewGame"])
-            @game = Game.find_by(name: params["NewGame"])
+        
+        if @user.games.all.collect{|game|game.name}.include?(params["name"])
+            redirect "/user/#{@user.id}/gameslist/new"
+        elsif Game.find_by(name: params["name"]) && params["name"] != ""
+            @game = Game.find_by(name: params["name"])
+        elsif params["name"] != ""
+            @game = Game.create(name: params["name"])
         else  
             redirect "/user/#{@user.id}/gameslist/new"
-        end 
+        end
         @user.games << @game
         @user.save
+        @users_game = UsersGame.find_by(user_id: @user.id, game_id: @game.id)
+        @users_game.notes = params[:notes]
+        @users_game.completion_time = params[:completion_time]
+        @users_game.save
         redirect "/user/#{@user.id}/gameslist"
     end
 

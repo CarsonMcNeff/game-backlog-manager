@@ -1,11 +1,10 @@
 <h1> Hey <%=@user.username%>, heres your backlog </h1>
 
 <ul>
-    <%@user.games.each do |game|%>
-    <li><%=game.name%>
-        <ul>
-            <%=%>
-        </ul>
+    <%@users_games.each do |game|%>
+    <li><%=Game.find_by_id(game.game_id).name%>
+        <ul><%=game.notes%></ul>
+        <ul><%=game.completion_time%></ul>
     </li>
     <%end%>
 </ul>
