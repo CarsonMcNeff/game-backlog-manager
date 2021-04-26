@@ -5,10 +5,10 @@ class UsersController < ApplicationController
 
     post '/user/signup' do 
         if params[:username] == "" || params[:password] == ""
-            redirect '/failure'
+            redirect '/user/failure'
         else  
             User.create(username: params[:username], password: params[:password])
-            redirect '/login'
+            redirect '/user/login'
         end 
     end
 
@@ -20,8 +20,15 @@ class UsersController < ApplicationController
         @user = User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
-            redirect "/user/#{@user.id}"
+            redirect "/user/#{@user.id}" 
+        else
+            redirect '/user/login'
         end
+    end
+
+    get '/user/logout' do
+        session.clear 
+        redirect to '/'
     end
 
     get '/user/:id' do 
