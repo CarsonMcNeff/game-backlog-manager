@@ -7,7 +7,6 @@ class UsersController < ApplicationController
         if params[:username] == "" || params[:password] == "" || User.all.collect{|user|user.username}.include?(params[:username])
             #TODO
             #ADD ERROR MESSAGE
-            puts "dog"
             redirect '/user/signup'
         else  
             User.create(username: params[:username], password: params[:password])
@@ -59,7 +58,7 @@ class UsersController < ApplicationController
         
         if @user.games.all.collect{|game|game.name}.include?(params["name"])
             redirect "/user/#{@user.id}/gameslist/new"
-        elsif Game.find_by(name: params["name"]) && params["name"] != ""
+        elsif Game.find_by(name: params["name"]) && params["name"] != "" && params["completion_time"] != ""
             @game = Game.find_by(name: params["name"])
         elsif params["name"] != ""
             @game = Game.create(name: params["name"])
@@ -72,7 +71,7 @@ class UsersController < ApplicationController
         @user.save
         @users_game = UsersGame.find_by(user_id: @user.id, game_id: @game.id)
         @users_game.notes = params[:notes]
-        @users_game.completion_time = params[:completion_time]
+        @users_game.completion_time = params[:completion_time].to_i
         @users_game.save
         redirect "/user/#{@user.id}/gameslist"
     end
@@ -87,12 +86,13 @@ class UsersController < ApplicationController
         end
         if params["completed"] == "on"
             @users_game.completed = true
-            @users_game.completion_time = params["completed_time"]
+            @users_game.completion_time = params["completed_time"].to_i
             @users_game.personal_rating = params["rating"]
+            @users_game.review = params["review"]
         elsif   
-            @users_game.completion_time = params["completion_time"]
+            @users_game.completion_time = params["completion_time"].to_i
+            @users_game.notes = params["notes"]
         end 
-        @users_game.notes = params["notes"]
         @users_game.save
         redirect "/user/#{session[:user_id]}/gameslist"
     end

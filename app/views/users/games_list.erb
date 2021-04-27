@@ -5,7 +5,7 @@
     <%gid = game.game_id%>
     <li><a href = "/game/<%=gid%>"><%=Game.find_by_id(gid).name%></a>
         <ul>Notes: <%=game.notes%></ul>
-        <ul>Estimated Time to beat: <%=game.completion_time%> hours</ul>
+        <ul>Estimated Time to Beat: <%=game.completion_time%> hours</ul>
         <br>
         <form method = "post" action = "/user/<%=@user.id%>/gameslist/<%=gid%>">
             <input id="hidden" type="hidden" name="_method" value="delete">
@@ -26,6 +26,7 @@
         <ul>Notes: <%=game.notes%></ul>
         <ul>Completion Time: <%=game.completion_time%> hours</ul>
         <ul>Your Rating: <%=game.personal_rating%>/10</ul>
+        <ul>Your Review: <%=game.review%></ul>
         <br>
         <form method = "post" action = "/user/<%=@user.id%>/gameslist/<%=gid%>">
             <input id="hidden" type="hidden" name="_method" value="delete">

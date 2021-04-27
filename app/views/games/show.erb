@@ -1,1 +1,21 @@
 <h1><%=@game.name%></h1>
+
+<%if @average_completion_time != nil%>
+    <h3>Average Completion Time: <%=@average_completion_time%> hours</h3>
+    <h3>Average Rating: <%=@average_rating%>/10</h3>
+<%else%>
+    <h3>No one has completed this game yet and submitted it, you could be the first!</h3>
+<%end%>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<h3>Users With <%=@game.name%> on Their Backlog: <%=@user_games.count - @completed_users.count%></h3>
+<br>
+<h3>Users Who've Beaten <%=@game.name%>: <%=@completed_users.count%></h3>
+
+
+<a href = "/user/<%=User.find(session[:user_id]).id%>/gameslist">Go back to your games list</a>
