@@ -27,7 +27,7 @@ ActiveRecord::Schema.define(version: 2021_04_26_215049) do
     t.string "notes"
     t.boolean "completed"
     t.decimal "personal_rating"
-    t.string "completion_time"
+    t.float "completion_time"
   end
 
 end

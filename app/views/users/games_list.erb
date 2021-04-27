@@ -2,9 +2,20 @@
 
 <ul>
     <%@users_games.each do |game|%>
-    <li><%=Game.find_by_id(game.game_id).name%>
-        <ul><%=game.notes%></ul>
-        <ul><%=game.completion_time%></ul>
+    <%gid = game.game_id%>
+    <li><form method = "get" action = "/game/<%=gid%>">
+            <%=Game.find_by_id(gid).name%>
+            <input name="game" type = "hidden" value = "<%=gid%>">
+            <input type = "submit" value = "See Page">
+        </form>
+        <ul>Notes: <%=game.notes%></ul>
+        <ul>Estimated Time to beat: <%=game.completion_time%> hours</ul>
+        <br>
+        <form method = "post" action = "/game/<%=gid%>">
+            <input id="hidden" type="hidden" name="_method" value="delete">
+            <input name ="game_id" type = "hidden" value = "<%=gid%>">
+            <input type = "submit" value = "Delete Game from Your List">
+        </form>
     </li>
     <%end%>
 </ul>
