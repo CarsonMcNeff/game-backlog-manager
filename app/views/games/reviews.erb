@@ -1,0 +1,10 @@
+<ul>
+    <%@completed_users.each do |user|%>
+        <li>
+            <%=user.review%>
+            <ul><%=user.personal_rating%>/10</ul>
+        </li>
+    <%end%>
+</ul>
+
+<a href = "/game/<%=@game.id%>">Go back to the game page</a>

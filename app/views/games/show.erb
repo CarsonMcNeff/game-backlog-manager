@@ -3,6 +3,7 @@
 <%if @average_completion_time != nil%>
     <h3>Average Completion Time: <%=@average_completion_time%> hours</h3>
     <h3>Average Rating: <%=@average_rating%>/10</h3>
+    <a href="/game/<%=@game.id%>/reviews"> Check out the game's reviews </a>
 <%else%>
     <h3>No one has completed this game yet and submitted it, you could be the first!</h3>
 <%end%>
