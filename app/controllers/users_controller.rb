@@ -4,7 +4,10 @@ class UsersController < ApplicationController
     end
 
     post '/user/signup' do 
-        if params[:username] == "" || params[:password] == ""
+        if params[:username] == "" || params[:password] == "" || User.all.collect{|user|user.username}.include?(params[:username])
+            #TODO
+            #ADD ERROR MESSAGE
+            puts "dog"
             redirect '/user/signup'
         else  
             User.create(username: params[:username], password: params[:password])
@@ -22,6 +25,8 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             redirect "/user/#{@user.id}/gameslist" 
         else
+            #TODO
+            #ADD ERROR MESSAGE
             redirect '/user/login'
         end
     end
@@ -59,6 +64,8 @@ class UsersController < ApplicationController
         elsif params["name"] != ""
             @game = Game.create(name: params["name"])
         else  
+            #TODO
+            #ADD ERROR MESSAGE
             redirect "/user/#{@user.id}/gameslist/new"
         end
         @user.games << @game
