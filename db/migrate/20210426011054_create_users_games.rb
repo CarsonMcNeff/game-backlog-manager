@@ -5,7 +5,7 @@ class CreateUsersGames < ActiveRecord::Migration[5.2]
       t.integer :game_id
       t.string :notes
       t.boolean :completed
-      t.decimal :personal_rating
+      t.integer :personal_rating
     end
   end
 end

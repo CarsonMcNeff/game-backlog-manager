@@ -1,26 +1,43 @@
 <h1> Hey <%=@user.username%>, heres your backlog </h1>
-
+<h2>Uncompleted Games:</h2>
 <ul>
-    <%@users_games.each do |game|%>
+    <%@users_uncompleted_games.each do |game|%>
     <%gid = game.game_id%>
-    <li><form method = "get" action = "/game/<%=gid%>">
-            <%=Game.find_by_id(gid).name%>
-            <input name="game" type = "hidden" value = "<%=gid%>">
-            <input type = "submit" value = "See Page">
-        </form>
+    <li><a href = "/game/<%=gid%>"><%=Game.find_by_id(gid).name%></a>
         <ul>Notes: <%=game.notes%></ul>
         <ul>Estimated Time to beat: <%=game.completion_time%> hours</ul>
         <br>
-        <form method = "post" action = "/game/<%=gid%>">
+        <form method = "post" action = "/user/<%=@user.id%>/gameslist/<%=gid%>">
             <input id="hidden" type="hidden" name="_method" value="delete">
-            <input name ="game_id" type = "hidden" value = "<%=gid%>">
             <input type = "submit" value = "Delete Game from Your List">
+        </form>
+        <form method = "get" action = "/user/<%=@user.id%>/gameslist/<%=gid%>/edit">
+            <input type = "submit" value = "Edit Game Information or Mark As Complete">
         </form>
     </li>
     <%end%>
 </ul>
+<h3>Hours left to play: <%=@users_uncompleted_games.collect{|game|game.completion_time}.sum%></h3>
+<h2>Completed Games:</h2>
+<ul>
+    <%@users_completed_games.each do |game|%>
+    <%gid = game.game_id%>
+    <li><a href = "/game/<%=gid%>"><%=Game.find_by_id(gid).name%></a>
+        <ul>Notes: <%=game.notes%></ul>
+        <ul>Completion Time: <%=game.completion_time%> hours</ul>
+        <ul>Your Rating: <%=game.personal_rating%>/10</ul>
+        <br>
+        <form method = "post" action = "/user/<%=@user.id%>/gameslist/<%=gid%>">
+            <input id="hidden" type="hidden" name="_method" value="delete">
+            <input type = "submit" value = "Delete Game from Your List">
+        </form>
+        <form method = "get" action = "/user/<%=@user.id%>/gameslist/<%=gid%>/edit">
+            <input type = "submit" value = "Edit Game Information or Mark As Complete">
+        </form>
+    </li>
+    <%end%>
+</ul>
+<h3>Hours played: <%=@users_completed_games.collect{|game|game.completion_time}.sum%></h3>
 <a href = "/user/<%=@user.id%>/gameslist/new">Click here to add to your list</a>
-<br>
-<a href = "/user/<%=@user.id%>/gameslist/edit">Click here to edit your list</a>
 <br>
 <p><a href="/user/logout">Log Out</a></p>

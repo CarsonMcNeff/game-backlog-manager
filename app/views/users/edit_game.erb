@@ -1,0 +1,19 @@
+<form method="POST" action = "/user/<%=@user.id%>/gameslist/<%=@users_game.game_id%>">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <label for="time_to_beat">Estimated time to beat it in hours:</label>
+    <input type = "text" name = "completion_time" value = "<%=@users_game.completion_time%>">
+    <br>
+    <label for="notes">Any notes on the game you want to have:</label>
+    <input type = "text" name = "notes" value = "<%=@users_game.notes%>">
+    <br>
+    
+    <p>If you have completed the game check here and add some information: <input type = "checkbox" name = "completed"></p>
+    
+    <label for="completed_time">Completion Time in Hours: </label>
+    <input type = "text" name = "completed_time">
+    <br>
+    <label for="rating">Rate the game 1-10: </label>
+    <input type = "text" name = "rating">
+    <br>
+    <input type = "submit" value = "Update Game">
+</form>

@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 2021_04_26_215049) do
     t.integer "game_id"
     t.string "notes"
     t.boolean "completed"
-    t.decimal "personal_rating"
-    t.float "completion_time"
+    t.integer "personal_rating"
+    t.integer "completion_time"
   end
 
 end

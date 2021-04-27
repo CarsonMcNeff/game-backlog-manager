@@ -1,0 +1,15 @@
+<form method = "POST" action = "/user/<%=@user.id%>/gameslist/<%=@users_game.game_id%>/complete">
+    <input id="hidden" type="hidden" name="_method" value="patch">
+    <p>Update your notes, completion time, or rating!</p>
+    <br>
+    <label for="new_notes">Notes:</label>
+    <input type = "text" name = "notes" value = "<%=@users_game.notes%>">
+    <br>
+    <label for="new_completion_time">Completion Time in Hours: </label>
+    <input type = "text" name = "completion_time" value = "<%=@users_game.completion_time%>">
+    <br>
+    <label for="new_rating">Rate the game 1-10: </label>
+    <input type = "text" name = "rating" value = "<%=@users_game.personal_rating%>">
+    <br>
+    <input type = "submit" value = "Update Game">
+</form>
