@@ -91,8 +91,8 @@ class UsersController < ApplicationController
             @users_game.review = params["review"]
         elsif   
             @users_game.completion_time = params["completion_time"].to_i
-            @users_game.notes = params["notes"]
         end 
+        @users_game.notes = params["notes"]
         @users_game.save
         redirect "/user/#{session[:user_id]}/gameslist"
     end

@@ -1,6 +1,6 @@
 <h1><%=@game.name%></h1>
 
-<%if @average_completion_time != nil%>
+<%if @average_completion_time != 0%>
     <h3>Average Completion Time: <%=@average_completion_time%> hours</h3>
     <h3>Average Rating: <%=@average_rating%>/10</h3>
     <a href="/game/<%=@game.id%>/reviews"> Check out the game's reviews </a>

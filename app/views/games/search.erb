@@ -1,0 +1,9 @@
+<form method = "get" action = "/game/redirect">
+<input list="Games" name = "game">
+    <datalist id="Games">
+        <% Game.all.each do |game|%>
+            <option value="<%=game.name%>">
+        <%end%>
+    </datalist>
+    <input type = "submit" value = "View Game">
+</form>

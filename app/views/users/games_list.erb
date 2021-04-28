@@ -41,4 +41,6 @@
 <h3>Hours played: <%=@users_completed_games.collect{|game|game.completion_time}.sum%></h3>
 <a href = "/user/<%=@user.id%>/gameslist/new">Click here to add to your list</a>
 <br>
+<a href = "/game/index">Browse the game database</a>
+<br>
 <p><a href="/user/logout">Log Out</a></p>
