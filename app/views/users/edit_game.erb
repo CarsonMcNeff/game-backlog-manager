@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %> 
+
 <form method="POST" action = "/user/<%=@user.id%>/gameslist/<%=@users_game.game_id%>">
     <input id="hidden" type="hidden" name="_method" value="patch">
     <label for="time_to_beat">Estimated time to beat it in hours:</label>
@@ -15,7 +19,7 @@
     <label for="rating">Rate the game 1-10: </label>
     <input type = "text" name = "rating">
     <br>
-    <label for="notes">Leave a review for the game (this will be public):</label>
+    <label for="notes">Leave a review for the game (this will be public, but it's not requried):</label>
     <input type = "text" name = "review">
     <br>
     <br>

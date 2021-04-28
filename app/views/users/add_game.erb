@@ -1,3 +1,7 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %> 
+
 <h1>Add a game to your backlog</h1>
 <form method="post" action = "/user/<%=@user.id%>/gameslist/new">
     <label for="name">Pick your game from the database if available or add a new one:</label>
@@ -13,7 +17,7 @@
     <label for="time_to_beat">Estimated time to beat it in hours:</label>
     <input type = "text" name = "completion_time">
     <br>
-    <label for="notes">Any notes on the game you want to have:</label>
+    <label for="notes">Any notes on the game you want to have (not required):</label>
     <input type = "text" name = "notes">
     <br>
     <input type = "submit" value = "Submit Game">

@@ -1,7 +1,11 @@
 <ul>
     <%@completed_users.each do |user|%>
         <li>
-            <%=user.review%>
+            <%if user.review == ""%>
+                <%=user.review%>
+            <%else%>
+                User did not leave review
+            <%end%>
             <ul><%=user.personal_rating%>/10</ul>
         </li>
     <%end%>

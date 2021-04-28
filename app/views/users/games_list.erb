@@ -1,10 +1,16 @@
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %> 
+
 <h1> Hey <%=@user.username%>, heres your backlog </h1>
 <h2>Uncompleted Games:</h2>
 <ul>
     <%@users_uncompleted_games.each do |game|%>
     <%gid = game.game_id%>
     <li><a href = "/game/<%=gid%>"><%=Game.find_by_id(gid).name%></a>
-        <ul>Notes: <%=game.notes%></ul>
+        <%if game.notes != ""%>
+            <ul>Notes: <%=game.notes%></ul>
+        <%end%>
         <ul>Estimated Time to Beat: <%=game.completion_time%> hours</ul>
         <br>
         <form method = "post" action = "/user/<%=@user.id%>/gameslist/<%=gid%>">
@@ -23,10 +29,14 @@
     <%@users_completed_games.each do |game|%>
     <%gid = game.game_id%>
     <li><a href = "/game/<%=gid%>"><%=Game.find_by_id(gid).name%></a>
-        <ul>Notes: <%=game.notes%></ul>
+        <%if game.notes != ""%>
+            <ul>Notes: <%=game.notes%></ul>
+        <%end%>
         <ul>Completion Time: <%=game.completion_time%> hours</ul>
         <ul>Your Rating: <%=game.personal_rating%>/10</ul>
-        <ul>Your Review: <%=game.review%></ul>
+        <%if game.review != ""%>
+            <ul>Your Review: <%=game.review%></ul>
+        <%end%>
         <br>
         <form method = "post" action = "/user/<%=@user.id%>/gameslist/<%=gid%>">
             <input id="hidden" type="hidden" name="_method" value="delete">
