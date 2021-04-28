@@ -18,8 +18,8 @@ class GamesController < ApplicationController
         @game = Game.find_by_id(params[:id])
         @user_games = UsersGame.all.filter{|user_game|user_game.game_id==@game.id}
         @completed_users = @user_games.filter{|user_game|user_game.completed == true}.filter{|user_game|user_game.completion_time > 0}.filter{|user_game|user_game.personal_rating > 0}
-        @average_completion_time = @completed_users.collect{|user_game|user_game.completion_time}.sum
         if @completed_users.collect{|user_game|user_game.personal_rating}.size > 0
+            @average_completion_time = @completed_users.collect{|user_game|user_game.completion_time}.sum / @completed_users.collect{|user_game|user_game.completion_time}.count
             @average_rating = @completed_users.collect{|user_game|user_game.personal_rating}.sum / @completed_users.collect{|user_game|user_game.personal_rating}.size
         end
         erb :'games/show'
