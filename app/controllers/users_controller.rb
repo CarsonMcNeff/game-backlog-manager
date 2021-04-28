@@ -61,7 +61,7 @@ class UsersController < ApplicationController
             redirect "/user/#{@user.id}/gameslist/new"
         elsif Game.find_by(name: params["name"]) && params["name"] != "" && params["completion_time"] != ""
             @game = Game.find_by(name: params["name"].strip)
-        elsif params["name"] != ""
+        elsif params["name"] != "" && params["completion_time"] != ""
             @game = Game.create(name: params["name"].strip)
         else  
             flash[:message] = "Unexpected error, try again"
